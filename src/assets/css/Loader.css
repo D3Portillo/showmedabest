@@ -1,0 +1,33 @@
+.spinner{
+    position: relative;
+}
+
+.firstOne{
+    -webkit-box-shadow: inset 0px 0px 8rem 0px rgba(0,0,0,0.6);
+    box-shadow: inset 0px 0px 8rem 0px rgba(0,0,0,0.6);
+}
+
+.spinner::before, .spinner::after{
+    content: '';
+    position: absolute;
+    border: 2px solid #00e8b9;
+    width: 4.6rem;
+    height: 4.6rem;
+    top: -0.3rem;
+    left: -0.3rem;
+    -webkit-animation: spinner 2.5s linear infinite;
+    animation: spinner 2.5s linear infinite;
+}
+
+.spinner::before{
+    border-width: 3px;
+    -webkit-animation-direction: reverse;
+    animation-direction: reverse
+}
+
+@-webkit-keyframes spinner{
+    from{transform: rotate(0deg)}
+    to{transform: rotate(360deg)}}
+@keyframes spinner{
+    from{transform: rotate(0deg)}
+    to{transform: rotate(360deg)}}

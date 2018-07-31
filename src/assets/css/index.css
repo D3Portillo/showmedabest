@@ -1,0 +1,27 @@
+body{
+    background: #0a0a0a
+}
+
+html{
+    overflow: hidden
+}
+
+.has-text-spot{
+    color: #00e8b9 !important
+}
+
+.has-background-spot{
+    background: #00e8b9 !important
+}
+
+.topNav > button{
+    margin: 0 5px
+}
+
+.itemBox:not(:last-child){
+    border-bottom: solid gray 1px
+}
+
+.itemBox:hover .favs{
+    display: block !important
+}

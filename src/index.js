@@ -1,8 +1,10 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import Loader from "./views/Loader"
+import logo from "./assets/img/logo.svg"
+import "./assets/css/index.css"
 
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+import registerServiceWorker from './registerServiceWorker'
+
+ReactDOM.render(<Loader logo={logo}/>, document.getElementById('root'))
+registerServiceWorker()
