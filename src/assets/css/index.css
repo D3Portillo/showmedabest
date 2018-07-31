@@ -23,5 +23,25 @@ html{
 }
 
 .itemBox:hover .favs{
-    display: block !important
+    display: block !important;
+    animation: fadeInUp 0.2s
+}
+
+.itemBox:first-child{
+    margin-top: 6rem
+}
+.searchPane.active{
+    width: 100% !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    
+}
+
+.columns.is-gapless > .column.searchPane.active{
+    padding: 1rem !important
+}
+
+.topNav{
+    z-index: 2
 }

@@ -3,9 +3,8 @@ const styles  = {
     minHeight: "100vh"
   },
   pane: {
-    overflow: "auto",
-    Height: "100vh",
     maxHeight: "100vh",
+    minHeight: "100vh",
     overflowX: "hidden"
   },
   flexy:{
@@ -17,7 +16,7 @@ const styles  = {
   topNav:{
     position: "absolute",
     top: 0,
-    width: "calc(100% - 2rem)",
+    width: "100%",
     justifyContent: "flex-start",
     padding: "1rem"
   },
@@ -26,7 +25,7 @@ const styles  = {
     position: "relative"
   },
   boxTitle:{
-      wordWrap: "wrap-all"
+      cursor: "pointer"
   },
   favs:{
     position: "absolute",
