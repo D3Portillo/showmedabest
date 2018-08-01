@@ -4,8 +4,8 @@ import styles from "../assets/js/styles"
 class ItemBox extends Component{
     render(){
         return(
-            <div style={styles.box} className="itemBox">
-               <h1 className="title has-text-grey  has-text-weight-normal" style={styles.boxTitle}>
+            <div style={styles.box} className="itemBox" cover={this.props.cover}>
+               <h1 className="subtitle is-3 has-text-grey  has-text-weight-normal" style={styles.boxTitle}>
                 #{1*this.props.pos + 1} - {this.props.title}
                </h1>
                <h2 className="subtitle" style={{marginBottom: "0 !important"}}>

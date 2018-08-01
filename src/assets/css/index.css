@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Playfair+Display+SC');
+
 body{
     background: #0a0a0a
 }
@@ -14,12 +16,12 @@ html{
     background: #00e8b9 !important
 }
 
-.topNav > button{
+.topNav  button{
     margin: 0 5px
 }
 
 .itemBox:not(:last-child){
-    border-bottom: solid gray 1px
+    border-bottom: solid gray 2px
 }
 
 .itemBox:hover .favs{
@@ -27,21 +29,34 @@ html{
     animation: fadeInUp 0.2s
 }
 
-.itemBox:first-child{
-    margin-top: 6rem
+.itemBox{
+    margin: 2rem
 }
+
+.searchPane.active .itemBox{
+    margin-left: 4rem;
+    margin-right: 4rem
+}
+
+.itemBox:first-child{
+    margin-top: 6rem !important
+}
+
 .searchPane.active{
     width: 100% !important;
     position: absolute;
     top: 0;
     left: 0;
-    
-}
-
-.columns.is-gapless > .column.searchPane.active{
-    padding: 1rem !important
 }
 
 .topNav{
     z-index: 2
+}
+
+.intro-animated{
+    animation: pulse 3.2s forwards infinite ease-in-out
+}
+
+.monoton-font{
+    font-family: 'Playfair Display SC', serif;
 }

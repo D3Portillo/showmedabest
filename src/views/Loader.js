@@ -17,7 +17,7 @@ class Loader extends Component {
   }
 
   fetchJsonAgain(query){
-    let qs = Object.keys(this.state.jsonBackUp).filter(e=>this.state.jsonBackUp[e][0]["title"]["label"].toLowerCase().match(query.toLowerCase())).map(e=>[this.state.jsonBackUp[e][0],this.state.jsonBackUp[e][1]])
+    let qs = Object.keys(this.state.jsonBackUp).filter(e=>this.state.jsonBackUp[e][0]["title"]["label"].toLowerCase().match(query.toLowerCase()) || this.state.jsonBackUp[e][0]["im:artist"]["label"].toLowerCase().match(query.toLowerCase())).map(e=>[this.state.jsonBackUp[e][0],this.state.jsonBackUp[e][1]])
     this.setState({feed: qs})
   }
 
