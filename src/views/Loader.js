@@ -14,22 +14,27 @@ class Loader extends Component {
     request("https://itunes.apple.com/us/rss/topalbums/limit=100/json", (error, response, body)=> {
       this.setState({feed: JSON.parse(body)["feed"]["entry"]},_=>this.prerareArray())
     }).on("end",_=>setTimeout(_=>this.setState({loaded: true}),600))
+    //fetching json file from api , hoping no errors up there,  error handler missing here ###################################
   }
 
   fetchJsonAgain(query){
     let qs = Object.keys(this.state.jsonBackUp).filter(e=>this.state.jsonBackUp[e][0]["title"]["label"].toLowerCase().match(query.toLowerCase()) || this.state.jsonBackUp[e][0]["im:artist"]["label"].toLowerCase().match(query.toLowerCase())).map(e=>[this.state.jsonBackUp[e][0],this.state.jsonBackUp[e][1]])
-    this.setState({feed: qs})
+    //for each element we filter them matching each of em with the query string , then we map the returned array with each values catched from the api , in this case we match album title or arstist name
+    //btw we use a backup like db for keeping iterating it any time we want, it can be boosted  with some data structure algorithm but 100 data is comming, by now
+    this.setState({feed: qs}) // at the end we set the new state of feed to the result array
   }
 
   prerareArray(){
     let qs = Object.keys(this.state.feed).map(e=>[this.state.feed[e],e])
     this.setState({feed: qs, jsonBackUp: qs})
+    //as we take album positioning as its index position, we gotta save the position it has to avoid any missing data ie: [elementInArray,pos]
   }
 
   render() {
     return (
       <div>
       {
+        //we show a lil loader while loading data
         !this.state.loaded ? 
         <div className="hero is-fullwidth is-fullheight is-black is-flex firstOne" style={styles.container}>
           <div className="hero-body has-text-centered">

@@ -26,6 +26,7 @@ html{
 
 .itemBox:hover .favs{
     display: block !important;
+    -webkit-animation: fadeInUp 0.2s;
     animation: fadeInUp 0.2s
 }
 
@@ -54,9 +55,30 @@ html{
 }
 
 .intro-animated{
+    -webkit-animation: pulse 3.2s forwards infinite ease-in-out;
     animation: pulse 3.2s forwards infinite ease-in-out
 }
 
 .monoton-font{
     font-family: 'Playfair Display SC', serif;
+}
+
+@media all and (max-width: 45rem){
+    html{
+        overflow-y: auto !important
+    }
+    .searchPane{
+        position: absolute;
+        left: 0;
+        width: 100% !important;
+        max-height: unset !important;
+        top: 100vh
+    }
+    .shower, .titles-container{
+        width: 100% !important
+    }
+    .searchPane.active .itemBox{
+        margin-left: 2rem;
+        margin-right: 2rem
+    }
 }
