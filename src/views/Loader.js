@@ -18,7 +18,12 @@ class Loader extends Component {
   }
 
   fetchJsonAgain(query){
-    let qs = Object.keys(this.state.jsonBackUp).filter(e=>this.state.jsonBackUp[e][0]["title"]["label"].toLowerCase().match(query.toLowerCase()) || this.state.jsonBackUp[e][0]["im:artist"]["label"].toLowerCase().match(query.toLowerCase())).map(e=>[this.state.jsonBackUp[e][0],this.state.jsonBackUp[e][1]])
+    query = query.replace(/#|[^a-zA-Z0-9 -']/gi, "").trim()
+    //We clean the regex to alphanumeric + some symbols only
+    let qs = Object.keys(this.state.jsonBackUp).filter(e=>
+      this.state.jsonBackUp[e][0]["title"]["label"].toLowerCase().match(query.toLowerCase()) || 
+      this.state.jsonBackUp[e][0]["im:artist"]["label"].toLowerCase().match(query.toLowerCase()) || 
+      this.state.jsonBackUp[e][1]==query-1).map(e=>[this.state.jsonBackUp[e][0],this.state.jsonBackUp[e][1]])
     //for each element we filter them matching each of em with the query string , then we map the returned array with each values catched from the api , in this case we match album title or arstist name
     //btw we use a backup like db for keeping iterating it any time we want, it can be boosted  with some data structure algorithm but 100 data is comming, by now
     this.setState({feed: qs}) // at the end we set the new state of feed to the result array

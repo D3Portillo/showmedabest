@@ -5,18 +5,11 @@ body{
 }
 
 html{
-    overflow: hidden
+    overflow: hidden;
+    font-size: 16px
 }
 
-.has-text-spot{
-    color: #00e8b9 !important
-}
-
-.has-background-spot{
-    background: #00e8b9 !important
-}
-
-.topNav  button{
+.topNav .marginMe{
     margin: 0 5px
 }
 
@@ -30,10 +23,6 @@ html{
     animation: fadeInUp 0.2s
 }
 
-.itemBox{
-    margin: 2rem
-}
-
 .searchPane.active .itemBox{
     margin-left: 4rem;
     margin-right: 4rem
@@ -44,6 +33,7 @@ html{
 }
 
 .searchPane.active{
+    display: block !important;
     width: 100% !important;
     position: absolute;
     top: 0;
@@ -63,22 +53,32 @@ html{
     font-family: 'Playfair Display SC', serif;
 }
 
-@media all and (max-width: 45rem){
+@media all and (max-width: 769px){
     html{
         overflow-y: auto !important
     }
+
     .searchPane{
-        position: absolute;
-        left: 0;
-        width: 100% !important;
-        max-height: unset !important;
-        top: 100vh
+        display: none
     }
+
     .shower, .titles-container{
         width: 100% !important
     }
+
     .searchPane.active .itemBox{
-        margin-left: 2rem;
-        margin-right: 2rem
+        margin-left: 1rem;
+        margin-right: 1rem
+    }
+
+    .itemBox{
+        margin: 0.5rem 2rem
+    }
+
+    .itemBox .favs{
+        display: block !important;
+        -webkit-animation: unset !important;
+        animation: unset !important;
+        background: rgba(0,0,0,0.4)
     }
 }

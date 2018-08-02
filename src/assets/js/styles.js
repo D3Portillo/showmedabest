@@ -42,8 +42,8 @@ const styles  = {
     height: "100vh",
     backgroundSize:"320px", 
     backgroundPosition: "center center",
-    webkitBoxshadow: "inset 0px 0px 6rem 4rem #0a0a0a ,  inset 0px 0px 3rem 2rem #0a0a0a",
-    mozBoxShadow: "inset 0px 0px 6rem 4rem #0a0a0a ,  inset 0px 0px 3rem 2rem #0a0a0a",
+    WebkitBoxshadow: "inset 0px 0px 6rem 4rem #0a0a0a ,  inset 0px 0px 3rem 2rem #0a0a0a",
+    MozBoxShadow: "inset 0px 0px 6rem 4rem #0a0a0a ,  inset 0px 0px 3rem 2rem #0a0a0a",
     boxShadow: "inset 0px 0px 6rem 4rem #0a0a0a ,  inset 0px 0px 3rem 2rem #0a0a0a"
   },
   orangeOne:{
