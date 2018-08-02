@@ -48,6 +48,7 @@ class Loader extends Component {
           </div>
         </div> : <Container feed={this.state.feed} fetchJsonAgain={this.fetchJsonAgain}/>
       }
+      <div className="scriptsContainer"></div>
       </div>
     )
   }

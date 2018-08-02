@@ -1,20 +1,23 @@
 import React,{Component} from 'react'
-const request = require("request")
+
+window.dataOn = (data)=>{
+    window.prepareJson(data)
+}
 
 class TrackList extends Component{
     constructor(props){
         super(props)
         this.state = {tracks: false, loaded: false, audioArr:[]}
         this.playMe = this.playMe.bind(this)
+        this.prepareJson = this.prepareJson.bind(this)
+        window.prepareJson = this.prepareJson
     }
 
     componentDidMount(){
-        request({uri: `https://itunes.apple.com/lookup?id=${this.props.albumId}&entity=song&callback=`, headers: {
-            'Access-Control-Allow-Origin': "*",
-            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
-        }}, (error, response, body)=> {
-            console.log(body)
-        })
+        let script = document.createElement("script")
+        script.src = `https://itunes.apple.com/lookup?id=${this.props.albumId}&entity=song&callback=dataOn`
+        document.querySelector(".scriptsContainer").innerHTML = ""
+        document.querySelector(".scriptsContainer").appendChild(script)
     }
     
     prepareJson(json){
