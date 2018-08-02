@@ -13,7 +13,7 @@ class TrackList extends Component{
             'Access-Control-Allow-Origin': "*",
             "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
         }}, (error, response, body)=> {
-            this.prepareJson(JSON.parse(body))
+            console.log(body)
         })
     }
     
