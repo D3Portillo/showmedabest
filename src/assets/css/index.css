@@ -4,6 +4,10 @@ body{
     background: #0a0a0a
 }
 
+.searchPane.noOverFlow{
+    overflow: hidden !important;
+}
+
 html{
     overflow: hidden;
     font-size: 16px

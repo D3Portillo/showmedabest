@@ -26,7 +26,8 @@ const styles  = {
     position: "relative"
   },
   boxTitle:{
-      cursor: "pointer"
+    cursor: "pointer",
+    marginBottom: 0
   },
   favs:{
     position: "absolute",

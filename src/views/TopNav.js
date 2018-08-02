@@ -4,7 +4,7 @@ import styles from "../assets/js/styles"
 class TopNav extends Component {
     render() {
         return(
-            <div style={{...styles.flexy,...styles.topNav,backgroundColor: this.props.active ? "rgba(10,10,10,0.97)" : ""}} className="topNav">
+            <div style={{...styles.flexy,...styles.topNav,backgroundColor: this.props.active ? "rgba(10,10,10,0.95)" : ""}} className="topNav">
                 {
                     !this.props.active ? <NormalMode searhPaneToggler={this.props.searhPaneToggler}/>
                     : <Input searhPaneToggler={this.props.searhPaneToggler} value={this.props.value} search={this.props.search}/>
@@ -36,7 +36,7 @@ const Input=props=>{
             <div className="field has-addons">
                         
                 <div className="control is-expanded">
-                    <input onInput={props.search} value={props.value} onChange={props.search} className="input is-primary has-text-primary has-background-black" type="text" placeholder=""/>
+                    <input value={props.value} onChange={props.search} className="input is-primary has-text-primary has-background-black" type="text" placeholder=""/>
                 </div>
                 <div className="control">
                     <button onClick={_=>props.searhPaneToggler()} className="button is-primary has-text-black">
