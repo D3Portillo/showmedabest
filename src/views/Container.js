@@ -41,7 +41,7 @@ class Container extends Component {
             this.props.feed[Math.round(Math.random()*4)][0]["im:image"][2]["label"] : ""})`}}></div> 
             {/*We show an album cover from the top 5 albums gotten from the api file*/}
             <div className="column is-7 titles-container" style={{...styles.flexy,flexDirection: "column", backgroundColor: "rgba(10,10,10,0.95)"}}>
-              <h1 className="subtitle is-1 has-text-grey-light has-text-centered monoton-font" style={{marginBottom: 0}}>
+              <h1 className="subtitle is-1 has-text-grey-light has-text-centered monoton-font" style={{marginBottom: 0,...styles.fadeIn}}>
                 TOP<span style={styles.entranceText}><span style={styles.orangeOne} className="has-text-warning">100</span><span style={{marginTop: "-0.8rem"}} className="has-text-primary">of</span></span>ITUNES
               </h1>
               <div className="has-background-spot"></div>

@@ -8,6 +8,10 @@ body{
     overflow: hidden !important;
 }
 
+.topNav.modalUp{
+    z-index: unset !important;
+}
+
 html{
     overflow: hidden;
     font-size: 16px
@@ -84,5 +88,11 @@ html{
         -webkit-animation: unset !important;
         animation: unset !important;
         background: rgba(0,0,0,0.4)
+    }
+}
+
+@media all and (max-width: 480px){
+    .modal img{
+        min-width: 100% !important
     }
 }

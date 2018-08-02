@@ -13,7 +13,6 @@ class Loader extends Component {
   componentDidMount(){
     request("https://itunes.apple.com/us/rss/topalbums/limit=100/json", (error, response, body)=> {
       this.setState({feed: JSON.parse(body)["feed"]["entry"]},_=>this.prerareArray())
-      console.log(JSON.parse(body))
     }).on("end",_=>setTimeout(_=>this.setState({loaded: true}),600))
     //fetching json file from api , hoping no errors up there,  error handler missing here ###################################
   }

@@ -59,6 +59,10 @@ const styles  = {
     flexDirection: "column",
     fontSize: "1.6rem",
     verticalAlign: "middle"
+  },
+  fadeIn:{
+    animation: "fadeIn 0.3s forwards", 
+    WebkitAnimation: "fadeIn 0.3s forwards"
   }
 }
 
