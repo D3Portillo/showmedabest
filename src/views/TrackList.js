@@ -9,8 +9,10 @@ class TrackList extends Component{
     }
 
     componentDidMount(){
-        request(`https://itunes.apple.com/lookup?id=${this.props.albumId}&entity=song&callback=`, (error, response, body)=> {
-            console.log(JSON.parse(body),this.props.albumId)
+        request({uri: `https://itunes.apple.com/lookup?id=${this.props.albumId}&entity=song&callback=`, headers: {
+            'Access-Control-Allow-Origin': "*",
+            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
+        }}, (error, response, body)=> {
             this.prepareJson(JSON.parse(body))
         })
     }
@@ -44,22 +46,28 @@ class TrackList extends Component{
 
     render() {
         return (
-        <table className="table is-fullwidth">
-        <tbody>
-            <th>#</th><th>Name</th><th></th>
-            {this.state.tracks ? 
-            this.state.tracks.map((e, i)=>
-            <tr>
-                <td>{1*i+1}</td>
-                <td>{e}</td>
-                <td>
-                    <button onClick={_=>this.playMe(i)} className={"button is-light audio"+i} title="Tap to play preview">
-                        <i className="far fa-play-circle"></i>
-                    </button>
-                </td>
-            </tr>) : ""}
-        </tbody>
-        </table>
+            <table className="table is-fullwidth">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {this.state.tracks ?
+                    this.state.tracks.map((e, i)=>
+                        <tr key={i}>
+                            <td>{1*i+1}</td>
+                            <td>{e}</td>
+                            <td>
+                                <button onClick={_=>this.playMe(i)} className={"button is-light audio"+i} title="Tap to play preview">
+                                    <i className="far fa-play-circle"></i>
+                                </button>
+                            </td>
+                        </tr>) : null}
+                </tbody>
+            </table>
         )
     }
 }
