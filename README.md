@@ -1,6 +1,6 @@
 # Showmedabest
 
-```javascript
+```
 Project Structure
 
 |-public
