@@ -1,6 +1,6 @@
 # Showmedabest
 
-```javascript
+```
 Project Structure
 
 |-public
@@ -44,6 +44,27 @@ You can type #20 or simply 20 , to get that album pos name and artist.
 Btw you can also search either by artist or album name, title., also you can take a look at the tracks the album has and listen a lil preview of it.
 
 You can also take a look at the album price and its cover pic, another thing out there is that you can add up one album to your fav's list, then you can manage them tappin' on the heart like icon
+
+## How to host
+
+first you need [NodeJS](https://nodejs.org/es/), then if you are on linux you gotta install git, if installed then copy this 
+```
+git clone https://github.com/D3Portillo/showmedabest.git
+```
+when cloned  type
+```
+cd showmedabest
+```
+then you gotta install all modules needed so
+```
+npm install
+```
+if all done then we can start the app, hoping no bugs comming ;'c
+```
+npm start
+```
+if you are on windows you can use the git cmd , fetch it [here](https://gitforwindows.org/)
+and type all the above code
 
 ## About the app and its code
 
