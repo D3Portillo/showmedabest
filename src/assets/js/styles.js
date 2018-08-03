@@ -6,7 +6,10 @@ const styles  = {
   pane: {
     maxHeight: "100vh",
     minHeight: "100vh",
-    overflowX: "hidden"
+    overflowX: "hidden",
+    MozUserSelect:"none",
+    WebkitUserSelect:"none",
+    userSelect:"none"
   },
   flexy:{
     position: "relative",

@@ -17,6 +17,10 @@ html{
     font-size: 16px
 }
 
+.hideMe{
+    display: none !important
+}
+
 .topNav .marginMe{
     margin: 0 5px
 }
@@ -79,7 +83,7 @@ html{
         margin-right: 1rem
     }
 
-    .itemBox{
+    .itemBox:not(.Me){
         margin: 0.5rem 2rem
     }
 

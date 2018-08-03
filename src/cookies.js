@@ -27,10 +27,6 @@ window.favs.getFavs = _=>{
     return cookies.get("favs").split(" | ")
 }
 
-window.favs.deleteAllFavs = _=>{
-    cookies.set("favs","")
-}
-
 window.favs.hasFav = fav=>{
     return 1*cookies.get("favs").split(" | ").indexOf(fav) + 1
 }

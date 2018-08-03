@@ -10,6 +10,7 @@ class Loader extends Component {
     this.fetchJsonAgain = this.fetchJsonAgain.bind(this)
     this.prerareArray = this.prerareArray.bind(this)
   }
+  
   componentDidMount(){
     request("https://itunes.apple.com/us/rss/topalbums/limit=100/json", (error, response, body)=> {
       this.setState({feed: JSON.parse(body)["feed"]["entry"]},_=>this.prerareArray())
