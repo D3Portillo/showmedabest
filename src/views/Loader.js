@@ -48,7 +48,8 @@ class Loader extends Component {
           </div>
         </div> : <Container feed={this.state.feed} fetchJsonAgain={this.fetchJsonAgain}/>
       }
-      <div className="scriptsContainer"></div>
+      <div className="scriptsContainer" style={{width: 0, height: 0}}></div>
+      {/*Not visible, but exists in DOM*/}
       </div>
     )
   }
