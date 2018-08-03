@@ -6,7 +6,7 @@ const request = require("request")
 class Loader extends Component {
   constructor(props){
     super(props)
-    this.state = {loaded: false, feed: false, jsonBackUp:false}
+    this.state = {loaded: false, feed: false, jsonBackUp:false,}
     this.fetchJsonAgain = this.fetchJsonAgain.bind(this)
     this.prerareArray = this.prerareArray.bind(this)
   }
@@ -14,6 +14,7 @@ class Loader extends Component {
   componentDidMount(){
     request("https://itunes.apple.com/us/rss/topalbums/limit=100/json", (error, response, body)=> {
       this.setState({feed: JSON.parse(body)["feed"]["entry"]},_=>this.prerareArray())
+      console.log(JSON.parse(body)["feed"]["entry"])
     }).on("end",_=>setTimeout(_=>this.setState({loaded: true}),600))
     //fetching json file from api , hoping no errors up there,  error handler missing here ###################################
   }
@@ -21,9 +22,13 @@ class Loader extends Component {
   fetchJsonAgain(query){
     query = query.replace(/#|[^a-zA-Z0-9 -']/gi, "").trim()
     //We clean the regex to alphanumeric + some symbols only
-    let qs = Object.keys(this.state.jsonBackUp).filter(e=>
-      this.state.jsonBackUp[e][0]["title"]["label"].toLowerCase().match(query.toLowerCase()) || 
-      this.state.jsonBackUp[e][1]==query-1).map(e=>[this.state.jsonBackUp[e][0],this.state.jsonBackUp[e][1]])
+    let qs = this.state.jsonBackUp
+    //if we got somethin to search , then go ahead
+    if(query.length>0){
+      qs = Object.keys(this.state.jsonBackUp).filter(e=>
+        this.state.jsonBackUp[e][0]["title"]["label"].toLowerCase().match(query.toLowerCase()) || 
+        this.state.jsonBackUp[e][1]==query-1).map(e=>[this.state.jsonBackUp[e][0],this.state.jsonBackUp[e][1]])
+    }
     //for each element we filter them matching each of em with the query string , then we map the returned array with each values catched from the api , in this case we match album title or arstist name --> update: title contains artist, so skipped
     //btw we use a backup like db for keeping iterating it any time we want, it can be boosted  with some data structure algorithm but 100 data is comming, by now
     this.setState({feed: qs}) // at the end we set the new state of feed to the result array

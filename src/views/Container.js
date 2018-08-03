@@ -3,6 +3,7 @@ import styles from "../assets/js/styles"
 import TopNav from "./TopNav"
 import LeftPane from "./LeftPane"
 import ItemBox from "./ItemBox"
+import Background from "./Background"
 
 class Container extends Component {
   constructor(props){
@@ -49,10 +50,9 @@ class Container extends Component {
       <div style={styles.container}>
       {this.props.feed ? 
       <TopNav feed={this.props.feed} searhPaneToggler={this.searhPaneToggler} active={this.state.searchPaneIsActive} value={this.state.query} search={this.search} showFavs={this.showFavs}/>: null}    
-        <div className="columns is-mobile is-gapless" style={{minHeight: "100vh"}}>
-          <div className="shower column is-7" style={{...styles.shower,backgroundImage: `url(${this.props.feed.length>4 ? 
-            this.props.feed[Math.round(Math.random()*4)][0]["im:image"][2]["label"] : ""})`}}></div> 
-            {/*We show an album cover from the top 5 albums gotten from the api file*/}
+        <div className="columns is-mobile is-gapless" style={{minHeight: "100vh", marginBottom: 0}}>
+          {this.props.feed ? <Background feed={this.props.feed}/> : null} 
+            {/*We show an album cover from the top 5 albums gotten from the api file ## fix: reTaking background couse of functional component re-rendering*/}
             <div className="column is-7 titles-container" style={{...styles.flexy,flexDirection: "column", backgroundColor: "rgba(10,10,10,0.95)"}}>
               <h1 className="subtitle is-1 has-text-grey-light has-text-centered monoton-font" style={{marginBottom: 0,...styles.fadeIn}}>
                 TOP<span style={styles.entranceText}><span style={styles.orangeOne} className="has-text-warning">100</span><span style={{marginTop: "-0.8rem"}} className="has-text-primary">of</span></span>ITUNES
