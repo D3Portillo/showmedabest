@@ -38,8 +38,9 @@ Project Structure
 ## User Story
 
 In the app you can search from the top 100 of albums from itunes, using its API.
+> PD: Sometimes <100 , it's couse of the API
 
-You can type #20 or simply 20 , to get that album pos name and artist.
+You can type #20 to grab that element from the list showing it's name and artist, if you only type ie: 19 , the result will be taken based on it's title , putting that query could be 1900's or idk.
 
 Btw you can also search either by artist or album name, title., also you can take a look at the tracks the album has and listen a lil preview of it.
 
