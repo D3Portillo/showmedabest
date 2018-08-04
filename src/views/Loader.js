@@ -6,7 +6,7 @@ const request = require("request")
 class Loader extends Component {
   constructor(props){
     super(props)
-    this.state = {loaded: false, feed: false, jsonBackUp:false,}
+    this.state = {loaded: false, feed: false, jsonBackUp:false, nameFilters: []}
     this.fetchJsonAgain = this.fetchJsonAgain.bind(this)
     this.prerareArray = this.prerareArray.bind(this)
   }
@@ -25,9 +25,11 @@ class Loader extends Component {
     let qs = this.state.jsonBackUp
     //if we got somethin to search , then go ahead
     if(query.length>0){
-      qs = Object.keys(this.state.jsonBackUp).filter(e=>
-        this.state.jsonBackUp[e][0]["title"]["label"].toLowerCase().match(query.toLowerCase()) || 
-        this.state.jsonBackUp[e][1]==query-1).map(e=>[this.state.jsonBackUp[e][0],this.state.jsonBackUp[e][1]])
+      let names = this.state.nameFilters
+      names = names.filter(e=>e[0].match(query.toLowerCase() || e[1]==query-1))
+      qs = names.map(e=>this.state.jsonBackUp[e[1]])
+      //instead of lopping the whole object we iterate over one holding the album titles and its positions on the list
+      //the we map that result from the base object holding the whole props of it
     }
     //for each element we filter them matching each of em with the query string , then we map the returned array with each values catched from the api , in this case we match album title or arstist name --> update: title contains artist, so skipped
     //btw we use a backup like db for keeping iterating it any time we want, it can be boosted  with some data structure algorithm but 100 data is comming, by now
@@ -35,8 +37,11 @@ class Loader extends Component {
   }
 
   prerareArray(){
-    let qs = Object.keys(this.state.feed).map(e=>[this.state.feed[e],e])
-    this.setState({feed: qs, jsonBackUp: qs})
+    let names = []
+    let qs = Object.keys(this.state.feed).map(e=>{
+      names.push([this.state.feed[e]["title"]["label"].toLowerCase(),e])
+      return [this.state.feed[e],e]})
+    this.setState({feed: qs, jsonBackUp: qs, nameFilters: names})
     //as we take album positioning as its index position, we gotta save the position it has to avoid any missing data ie: [elementInArray,pos]
   }
 
@@ -51,6 +56,8 @@ class Loader extends Component {
             <div className="spinner" style={styles.spinner}>
               <img src={this.props.logo} style={styles.logo} alt=""/>
             </div>
+            <i className="far fa-play-circle is-hidden"></i>
+            <i className="far fa-pause-circle is-hidden"></i>
           </div>
         </div> : <Container feed={this.state.feed} fetchJsonAgain={this.fetchJsonAgain}/>
       }

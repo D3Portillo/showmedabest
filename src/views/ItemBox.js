@@ -33,7 +33,7 @@ class ItemBox extends Component{
         {this.props.artist}
          </h2>
          <button onClick={_=>this.setFav(this.props.albumId)} className="button is-dark has-text-grey is-small favs" style={styles.favs} title="Add item to your favs list">
-          <i className={"fas fa-heart " + (this.state.favId ? "has-text-danger":"has-text-primary")}></i>
+          <i className={"fas "+(this.props.forcedFont?" fa-trash " : " fa-heart ") + (this.state.favId ? "has-text-danger":"has-text-primary")}></i>
          </button>
       </div>
     )
