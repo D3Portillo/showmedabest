@@ -6,7 +6,7 @@ const request = require("request")
 class Loader extends Component {
   constructor(props){
     super(props)
-    this.state = {loaded: false, feed: false, jsonBackUp:false, nameFilters: []}
+    this.state = {loaded: false, feed: false, jsonBackUp:false, nameFilters: [], nameIndexes: []}
     this.fetchJsonAgain = this.fetchJsonAgain.bind(this)
     this.prerareArray = this.prerareArray.bind(this)
   }
@@ -14,34 +14,55 @@ class Loader extends Component {
   componentDidMount(){
     request("https://itunes.apple.com/us/rss/topalbums/limit=100/json", (error, response, body)=> {
       this.setState({feed: JSON.parse(body)["feed"]["entry"]},_=>this.prerareArray())
-      console.log(JSON.parse(body)["feed"]["entry"])
     }).on("end",_=>setTimeout(_=>this.setState({loaded: true}),600))
     //fetching json file from api , hoping no errors up there,  error handler missing here ###################################
   }
 
   fetchJsonAgain(query){
-    query = query.replace(/#|[^a-zA-Z0-9 -']/gi, "").trim()
-    //We clean the regex to alphanumeric + some symbols only
+    query = query.trim().toLowerCase().replace(/[^a-z0-9# ]/gi, "-").replace(/-+/gi,"-")
     let qs = this.state.jsonBackUp
-    //if we got somethin to search , then go ahead
-    if(query.length>0){
-      let names = this.state.nameFilters
-      names = names.filter(e=>e[0].match(query.toLowerCase() || e[1]==query-1))
-      qs = names.map(e=>this.state.jsonBackUp[e[1]])
-      //instead of lopping the whole object we iterate over one holding the album titles and its positions on the list
-      //the we map that result from the base object holding the whole props of it
+    let copy = qs
+    if(query=="givemeanupdatepleaseupal"){
+      this.setState({feed: []},_=>this.setState({feed: qs}))
+      return 
     }
-    //for each element we filter them matching each of em with the query string , then we map the returned array with each values catched from the api , in this case we match album title or arstist name --> update: title contains artist, so skipped
-    //btw we use a backup like db for keeping iterating it any time we want, it can be boosted  with some data structure algorithm but 100 data is comming, by now
-    this.setState({feed: qs}) // at the end we set the new state of feed to the result array
+    else if(query=="-"){
+      qs = []
+    }
+    else if(query.length>0){
+      let names = this.state.nameFilters
+      qs = []
+      if(!isNaN(query.substr(1)-1) && query.charAt(0)=="#"){
+        let pos = query.substr(1) - 1
+        if(copy[pos]){
+          qs.push(copy[pos])
+        }
+      }
+      else {
+        query.replace(/#/gi,"")
+        names = names.match(new RegExp(`([^||]*${query}[^||]*)`,"g"))
+        let indexes = this.state.nameIndexes
+        if(names!=null){
+          names = names.map(e=>{
+            let i = indexes.indexOf(e)
+            return copy[i]
+          })
+          qs = names
+        }
+      }
+    }
+    this.setState({feed: qs})
   }
 
   prerareArray(){
-    let names = []
-    let qs = Object.keys(this.state.feed).map(e=>{
-      names.push([this.state.feed[e]["title"]["label"].toLowerCase(),e])
-      return [this.state.feed[e],e]})
-    this.setState({feed: qs, jsonBackUp: qs, nameFilters: names})
+    let names = ""
+    let indexes = []
+    let feed = this.state.feed
+    let qs = Object.keys(feed).map(e=>{
+      names+=`||${feed[e]["title"]["label"].toLowerCase()}||`
+      indexes.push(feed[e]["title"]["label"].toLowerCase())
+      return [feed[e],e]})
+    this.setState({feed: qs, jsonBackUp: qs, nameFilters: names, nameIndexes: indexes})
     //as we take album positioning as its index position, we gotta save the position it has to avoid any missing data ie: [elementInArray,pos]
   }
 

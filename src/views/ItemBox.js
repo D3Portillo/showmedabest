@@ -32,7 +32,7 @@ class ItemBox extends Component{
          <h2 className="subtitle" style={{marginBottom: "0 !important"}}>
         {this.props.artist}
          </h2>
-         <button onClick={_=>this.setFav(this.props.albumId)} className="button is-dark has-text-grey is-small favs" style={styles.favs} title="Add item to your favs list">
+         <button onClick={_=>this.setFav(this.props.albumId)} className={"button "+(this.props.forcedFont?" is-black " : " is-dark  ") + "is-small favs"} style={styles.favs} title="Add item to your favs list">
           <i className={"fas "+(this.props.forcedFont?" fa-trash " : " fa-heart ") + (this.state.favId ? "has-text-danger":"has-text-primary")}></i>
          </button>
       </div>

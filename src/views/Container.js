@@ -29,7 +29,7 @@ class Container extends Component {
     //wildly setting state as query for the json album filtering 
   }
 
-  componentDidUpdate(pprovs, pstate){
+  componentDidUpdate(pprops, pstate){
     if(pstate.query!==this.state.query){
       this.props.fetchJsonAgain(this.state.query)
       //if the prevState is diff current state then we gotta fetch a new filtered arr
@@ -37,8 +37,8 @@ class Container extends Component {
   }
 
   showFavs(){
-    this.setState({favsShowing: !this.state.favsShowing,favs: window.favs.getFavs(), query:"VeryLongTextToForceUpdate"},
-    _=>this.setState({query:""}))
+    this.setState({favsShowing: !this.state.favsShowing,favs: window.favs.getFavs()})
+    this.props.fetchJsonAgain("givemeanupdatepleaseupal")
   }
 
   bindFavs(){
