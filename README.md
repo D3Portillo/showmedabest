@@ -13,9 +13,11 @@ Project Structure
 |-|-|-css
 |-|-|-js
 |-|-views
+|-|-|-Background.js
 |-|-|-Container.js
 |-|-|-LeftPane.js
 |-|-|-TrackList.js
+|-|-|-ItemBox.js
 |-|-|-TopNav.js
 |-|-|-Loader.js
 |-|-index.js
