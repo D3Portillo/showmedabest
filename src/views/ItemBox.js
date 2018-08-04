@@ -17,7 +17,7 @@ class ItemBox extends Component{
       this.setState({favId: id})
       window.favs.setFav(id)
     }
-    if(this.props.setFavs) this.props.setFavs()
+    this.props.bindFavs()
   }
 
   render(){

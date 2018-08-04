@@ -41,7 +41,7 @@ class LeftPane extends Component{
     <div className={"column has-background-black is-5 searchPane " + (this.props.active ? "active" : "")} style={{...styles.pane,...styles.fadeIn}}>
       <div className="column is-8 is-offset-2">
       {
-      this.props.feed ? //hoping we are avoiding falsy values here
+      this.props.feed!=0? //hoping we are avoiding falsy values here
       Object.keys(this.props.feed).map(e=>{
         let feed = this.props.feed[e][0]
         let albumId = feed["id"]["attributes"]["im:id"]
@@ -55,8 +55,8 @@ class LeftPane extends Component{
           albumId={albumId}
           price={feed["im:price"]["label"]} 
           title={feed["title"]["label"]}
-          favId={window.favs.hasFav(albumId) ? albumId : false}  forcedFont={false} setFavs={false}/>
-      }) : ""
+          favId={window.favs.hasFav(albumId) ? albumId : false}  forcedFont={false} bindFavs={this.props.bindFavs}/>
+      }) : <div className="itemBox has-text-centered">Sorry, but I couln't find the album you're looking for <i className="fas fa-sad-cry is-size-5"></i></div>
       }
       </div>
       {this.state.modalIsActive ? 

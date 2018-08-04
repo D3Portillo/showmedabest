@@ -1,4 +1,5 @@
 import React,{Component} from 'react'
+import styles from "../assets/js/styles"
 
 window.dataOn = (data)=>{
   window.prepareJson(data)
@@ -74,20 +75,21 @@ class TrackList extends Component{
     return (
       <table className="table is-fullwidth">
         <thead>
+        {this.state.tracks ?
           <tr>
             <th>#</th>
             <th>Name</th>
             <th></th>
-          </tr>
+          </tr> : null}
         </thead>
         <tbody>
           {this.state.tracks ?
           this.state.tracks.map((e, i)=>
-            <tr key={i}>
+            <tr key={i} style={styles.fadeIn}>
               <td>{1*i+1}</td>
               <td>{e}</td>
               <td>
-                <button onClick={_=>this.playMe(i)} className={"button is-primary  is-outlined audio"+i} title="Tap to play preview">
+                <button onClick={_=>this.playMe(i)} className={"button is-danger audio"+i} title="Tap to play preview">
                   {/*Plays preview at it's index 'i'*/}
                   <i className="far fa-play-circle"></i>
                 </button>
