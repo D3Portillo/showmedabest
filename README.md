@@ -1,28 +1,29 @@
 # Showmedabest
 
 ```
-Project Structure
+Project Structure:
 
-|-public
-|-|-manifest.json
-|-|-logo.svg
-|-|-index.html
-|-src
-|-|-assets
-|-|-|-img
-|-|-|-css
-|-|-|-js
-|-|-views
-|-|-|-Background.js
-|-|-|-Container.js
-|-|-|-LeftPane.js
-|-|-|-TrackList.js
-|-|-|-ItemBox.js
-|-|-|-TopNav.js
-|-|-|-Loader.js
-|-|-index.js
-|-|-registerServiceWorker.js
-|-|-cookies.js
+showmedabest
+public
+|--manifest.json
+|  |--logo.svg
+|  |-index.html
+|--src
+|  |--assets
+|  |  |--img
+|  |  |--css
+|  |  |--js
+|  |--views
+|  |  |--Background.js
+|  |  |--Container.js
+|  |  |--LeftPane.js
+|  |  |--TrackList.js
+|  |  |--ItemBox.js
+|  |  |--TopNav.js
+|  |  |--Loader.js
+|--index.js
+|--registerServiceWorker.js
+|--cookies.js
 
 ```
 
