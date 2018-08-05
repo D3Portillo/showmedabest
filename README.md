@@ -4,10 +4,10 @@
 Project Structure:
 
 showmedabest
-public
-|--manifest.json
+|--public
+|  |--manifest.json
 |  |--logo.svg
-|  |-index.html
+|  |--index.html
 |--src
 |  |--assets
 |  |  |--img
@@ -21,9 +21,9 @@ public
 |  |  |--ItemBox.js
 |  |  |--TopNav.js
 |  |  |--Loader.js
-|--index.js
-|--registerServiceWorker.js
-|--cookies.js
+|  |--index.js
+|  |--registerServiceWorker.js
+|  |--cookies.js
 
 ```
 
