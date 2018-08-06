@@ -43,10 +43,7 @@ class Loader extends Component {
         names = names.match(new RegExp(`([^||]*${query}[^||]*)`,"g"))
         let indexes = this.state.nameIndexes
         if(names!=null){
-          names = names.map(e=>{
-            let i = indexes.indexOf(e)
-            return copy[i]
-          })
+          names = names.map(e=>copy[indexes.indexOf(e)])
           qs = names
         }
       }

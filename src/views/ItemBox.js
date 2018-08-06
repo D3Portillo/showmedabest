@@ -23,7 +23,7 @@ class ItemBox extends Component{
   render(){
     return(
       <div style={{...styles.box,padding: this.props.forcedFont? "0.45rem 1rem":"",borderColor: this.props.forcedFont? "#616161":"auto"}} className={"itemBox " + (this.props.forcedFont? "Me" : "") + (!this.state.favId && this.props.forcedFont?" hideMe": "")}>
-         <h1 onClick={this.props.showModal ? _=>this.props.showModal(this.props.title,  this.props.cover, this.props.href, this.props.albumId, this.props.price) : null} 
+         <h1 onClick={this.props.showModal ? _=>this.props.showModal(this.props.title,  this.props.cover, this.props.href, this.props.albumId, this.props.price, this.props.releaseDate) : null} 
          className={"subtitle is-size-4-mobile has-text-weight-normal has-text-grey " + (this.props.forcedFont? "is-size-4-tablet" : "is-size-3-tablet")} style={styles.boxTitle}>
         #{1*this.props.pos + 1} - {this.props.name}
         {/* at firt time json file is taken from the api curr pos of albums is it's index thus current pos is index + 1*/}

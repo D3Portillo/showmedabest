@@ -44,7 +44,7 @@ const styles  = {
     left: 0,
     width: "calc(7*100vw/12)",
     height: "100vh",
-    backgroundSize:"320px", 
+    backgroundSize:"26rem", 
     backgroundPosition: "center center",
     WebkitBoxshadow: "inset 0px 0px 6rem 4rem #0a0a0a ,  inset 0px 0px 3rem 2rem #0a0a0a",
     MozBoxShadow: "inset 0px 0px 6rem 4rem #0a0a0a ,  inset 0px 0px 3rem 2rem #0a0a0a",

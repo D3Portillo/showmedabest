@@ -6,7 +6,7 @@ import styles from "../assets/js/styles"
 class LeftPane extends Component{
   constructor(props){
     super(props)
-    this.state = {modalIsActive : false, title:"", cover:"",href:"" , showingTracks: false, albumId: "", price: ""}
+    this.state = {modalIsActive : false, title:"", cover:"",href:"" , showingTracks: false, albumId: "", price: "", releaseDate: ""}
     this.showModal = this.showModal.bind(this)
     this.hideModal = this.hideModal.bind(this)
     this.showTracks = this.showTracks.bind(this)
@@ -20,8 +20,8 @@ class LeftPane extends Component{
     })
   }
   
-  showModal(title,cover,href,albumId, price){
-    this.setState({modalIsActive : true, title: title, cover: cover, href: href, albumId: albumId, price: price})
+  showModal(title,cover,href,albumId, price,releaseDate){
+    this.setState({modalIsActive : true, title: title, cover: cover, href: href, albumId: albumId, price: price, releaseDate: releaseDate})
     document.querySelector(".searchPane").classList.add("noOverFlow")
     document.querySelector(".topNav").classList.add("modalUp")
   }
@@ -55,6 +55,7 @@ class LeftPane extends Component{
           albumId={albumId}
           price={feed["im:price"]["label"]} 
           title={feed["title"]["label"]}
+          releaseDate={feed["im:releaseDate"]["attributes"]["label"]}
           favId={window.favs.hasFav(albumId) ? albumId : false}  forcedFont={false} bindFavs={this.props.bindFavs}/>
       }) : <div className="itemBox has-text-centered">Sorry, but I couln't find the album you're looking for <i className="fas fa-sad-cry is-size-5"></i></div>
       }
@@ -62,7 +63,7 @@ class LeftPane extends Component{
       {this.state.modalIsActive ? 
         <Modal active={this.state.modalIsActive} albumId={this.state.albumId} showTracks={this.showTracks} 
           showingTracks={this.state.showingTracks} title={this.state.title} cover={this.state.cover} 
-          price={this.state.price} href={this.state.href} hideModal={this.hideModal}/> : ""}
+          price={this.state.price} href={this.state.href} hideModal={this.hideModal} releaseDate={this.state.releaseDate}/> : ""}
     </div>
     )
   }
@@ -80,6 +81,9 @@ const Modal = props=>{
             {props.title}
             </p>
             <img src={props.cover} alt="" style={{display: "block",minWidth: "320px", margin: "0 auto", ...styles.fadeIn}}/>
+            <p className="has-text-centered help">
+              Released <b>{props.releaseDate}</b>
+            </p>
           </div>:
           <div className="card-content">
             <p className="title has-text-black">
