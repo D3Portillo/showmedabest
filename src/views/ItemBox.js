@@ -22,22 +22,37 @@ class ItemBox extends Component{
 
   render(){
     return(
-      <div style={{...styles.box,padding: this.props.forcedFont? "0.45rem 1rem":"",borderColor: this.props.forcedFont? "#616161":"auto"}} className={"itemBox " + (this.props.forcedFont? "Me" : "") + (!this.state.favId && this.props.forcedFont?" hideMe": "")}>
-         <h1 onClick={this.props.showModal ? _=>this.props.showModal(this.props.title,  this.props.cover, this.props.href, this.props.albumId, this.props.price, this.props.releaseDate) : null} 
-         className={"subtitle is-size-4-mobile has-text-weight-normal has-text-grey " + (this.props.forcedFont? "is-size-4-tablet" : "is-size-3-tablet")} style={styles.boxTitle}>
+      this.props.favsMode ? 
+      <div style={{...styles.box,padding:  "0.45rem 1rem", borderColor: "#616161"}} className={"itemBox Me" + (!this.state.favId?" hideMe": "")}>
+        <h1 className={"subtitle is-size-4-mobile has-text-weight-normal has-text-grey is-size-4-tablet"} style={styles.boxTitle}>
+          #{1*this.props.pos + 1} - {this.props.name}
+        </h1>
+        <h2 className="subtitle" style={{marginBottom: "0 !important"}}>
+          {this.props.artist}
+        </h2>
+        <button onClick={_=>this.setFav(this.props.albumId)} className="button is-black is-small favs" style={styles.favs} title="Remove this item to your favs list">
+          <i className="fas fa-trash"></i>
+        </button>
+      </div>:
+
+      <div style={styles.box} className="itemBox">
+      <h1 onClick={_=>this.props.showModal(this.props.title,  this.props.cover, this.props.href, this.props.albumId, this.props.price, this.props.releaseDate)} 
+      className="subtitle is-size-4-mobile has-text-weight-normal has-text-grey is-size-3-tablet" style={styles.boxTitle}>
         #{1*this.props.pos + 1} - {this.props.name}
-        {/* at firt time json file is taken from the api curr pos of albums is it's index thus current pos is index + 1*/}
-        {/*See Loader view, its near this file*/}
-         </h1>
-         <h2 className="subtitle" style={{marginBottom: "0 !important"}}>
+      </h1>
+      <h2 className="subtitle" style={{marginBottom: "0 !important"}}>
         {this.props.artist}
-         </h2>
-         <button onClick={_=>this.setFav(this.props.albumId)} className={"button "+(this.props.forcedFont?" is-black " : " is-dark  ") + "is-small favs"} style={styles.favs} title="Add item to your favs list">
-          <i className={"fas "+(this.props.forcedFont?" fa-trash " : " fa-heart ") + (this.state.favId ? "has-text-danger":"has-text-primary")}></i>
-         </button>
+      </h2>
+      <button onClick={_=>this.setFav(this.props.albumId)} className="button is-dark is-small favs" style={styles.favs} title="Add item to your favs list">
+        <i className={"fas fa-heart " + (this.state.favId ? "has-text-danger":"has-text-primary")}></i>
+      </button>
       </div>
     )
   }
+}
+
+ItemBox.defaultProps = {
+  favsMode: false
 }
 
 export default ItemBox

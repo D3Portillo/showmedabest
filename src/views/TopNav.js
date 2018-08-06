@@ -6,9 +6,16 @@ class TopNav extends Component {
     return(
       <div style={{...styles.flexy,...styles.fadeIn,...styles.topNav,backgroundColor: this.props.active ? "rgba(10,10,10,0.95)" : ""}} className="topNav">
         {
-          !this.props.active ? 
-          <NormalMode showFavs={this.props.showFavs} searhPaneToggler={this.props.searhPaneToggler} favMode={this.props.favMode}/>
-          :<Input searhPaneToggler={this.props.searhPaneToggler} value={this.props.value} search={this.props.search}/>
+          this.props.active ? 
+          <Input 
+            searhPaneToggler={this.props.searhPaneToggler} 
+            value={this.props.value} 
+            search={this.props.search}/>
+          :
+          <NormalMode 
+            showFavs={this.props.showFavs} 
+            searhPaneToggler={this.props.searhPaneToggler} 
+            favMode={this.props.favMode}/>
         }{/*When nav is active it means its in searching mode, and changes it's base component*/}
       </div>
     )

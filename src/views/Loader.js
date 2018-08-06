@@ -8,13 +8,13 @@ class Loader extends Component {
     super(props)
     this.state = {loaded: false, feed: false, jsonBackUp:false, nameFilters: [], nameIndexes: []}
     this.fetchJsonAgain = this.fetchJsonAgain.bind(this)
-    this.prerareArray = this.prerareArray.bind(this)
+    this.prerareJson = this.prerareJson.bind(this)
   }
   
   componentDidMount(){
     request("https://itunes.apple.com/us/rss/topalbums/limit=100/json", (error, response, body)=> {
-      this.setState({feed: JSON.parse(body)["feed"]["entry"]},_=>this.prerareArray())
-    }).on("end",_=>setTimeout(_=>this.setState({loaded: true}),600))
+      this.setState({feed: JSON.parse(body)["feed"]["entry"]},_=>this.prerareJson())
+    }).on("end",_=>setTimeout(_=>this.setState({loaded: true}),600)).on("error",_=>this.setState({feed: []}))
     //fetching json file from api , hoping no errors up there,  error handler missing here ###################################
   }
 
@@ -25,9 +25,11 @@ class Loader extends Component {
     if(query=="givemeanupdatepleaseupal"){
       this.setState({feed: []},_=>this.setState({feed: qs}))
       return 
+      //if an updated need wont continue
     }
     else if(query=="-"){
       qs = []
+      //if there's a special char that can affect the regex then we return empty
     }
     else if(query.length>0){
       let names = this.state.nameFilters
@@ -36,22 +38,26 @@ class Loader extends Component {
         let pos = query.substr(1) - 1
         if(copy[pos]){
           qs.push(copy[pos])
+          //if we match a # at pos 0 and its a number then user is asking for a specific position
         }
       }
       else {
         query.replace(/#/gi,"")
         names = names.match(new RegExp(`([^||]*${query}[^||]*)`,"g"))
+        //we search troughout the name regex if on matches the query, it's added by default using match
         let indexes = this.state.nameIndexes
         if(names!=null){
           names = names.map(e=>copy[indexes.indexOf(e)])
           qs = names
+          //if there was no problem in regex we return the fetched items and return dem based on it's index,
+          //setted at prerareJson
         }
       }
     }
     this.setState({feed: qs})
   }
 
-  prerareArray(){
+  prerareJson(){
     let names = ""
     let indexes = []
     let feed = this.state.feed

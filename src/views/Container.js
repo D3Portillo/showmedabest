@@ -61,7 +61,11 @@ class Container extends Component {
                 rock n rolling, showin' u the best pals!
               </h2>
             </div>
-          {this.props.feed ? <LeftPane feed={this.props.feed} active={this.state.searchPaneIsActive} bindFavs={this.bindFavs}/> : null}
+          {this.props.feed ? 
+          <LeftPane 
+            feed={this.props.feed} 
+            active={this.state.searchPaneIsActive} 
+            bindFavs={this.bindFavs}/> : null}
         </div>
         <div style={styles.fadeIn} className={"modal "+(this.state.favsShowing ? "is-active" : "")}>
           <div className="modal-background" onClick={this.showFavs}></div>
@@ -72,19 +76,24 @@ class Container extends Component {
                   Your favorite albums
                 </h1>
                 {
-                  this.state.favs!=0 && this.state.favsBinder!=""? Object.keys(this.props.feed).filter(e=>window.favs.hasFav(this.props.feed[e][0]["id"]["attributes"]["im:id"])).map(e=>{
-                    let feed = this.props.feed[e][0]
-                    return <ItemBox name={feed["im:name"]["label"]} 
-                      artist={feed["im:artist"]["label"]} 
-                      key={e} 
-                      pos={this.props.feed[e][1]} 
-                      cover={feed["im:image"][2]["label"]} 
-                      href={feed["link"]["attributes"]["href"]} 
-                      showModal={false} 
-                      albumId={feed["id"]["attributes"]["im:id"]}
-                      price={feed["im:price"]["label"]} 
-                      title={feed["title"]["label"]}
-                      favId={feed["id"]["attributes"]["im:id"]} forcedFont={true} bindFavs={this.bindFavs}/>
+                  this.state.favs!=0 && this.state.favsBinder!=""? 
+                  Object.keys(this.props.feed).filter(e=>
+                    window.favs.hasFav(this.props.feed[e][0]["id"]["attributes"]["im:id"])).map(e=>{
+                      let feed = this.props.feed[e][0]
+                      return <ItemBox 
+                        name={feed["im:name"]["label"]} 
+                        artist={feed["im:artist"]["label"]} 
+                        key={e} 
+                        pos={this.props.feed[e][1]} 
+                        cover={feed["im:image"][2]["label"]} 
+                        href={feed["link"]["attributes"]["href"]} 
+                        showModal={false} 
+                        albumId={feed["id"]["attributes"]["im:id"]}
+                        price={feed["im:price"]["label"]} 
+                        title={feed["title"]["label"]}
+                        favId={feed["id"]["attributes"]["im:id"]} 
+                        bindFavs={this.bindFavs}
+                        favsMode={true}/>
                   }): 
                   <p className="has-text-centered" style={{padding: "1rem 0.5rem"}}>
                     Empty, please add some songs tappin' the heart on them, dont be that bad! :3

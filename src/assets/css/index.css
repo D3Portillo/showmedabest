@@ -26,7 +26,7 @@ html{
 }
 
 .Me *:not(.favs) {
-    cursor: unset !important
+    cursor: context-menu !important
 }
 .itemBox:not(:last-child){
     border-bottom: solid gray 2px
