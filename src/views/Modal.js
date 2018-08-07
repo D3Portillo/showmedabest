@@ -3,26 +3,28 @@ import TrackList from "./TrackList"
 import styles from "../assets/js/styles"
 
 const Modal = props=>{
+  let hideModal = props.hideModal
+  let data = props.data
   return(
     <div className="modal is-active" style={styles.fadeIn}>
-    <div className="modal-background" onClick={props.hideModal}></div>
+    <div className="modal-background" onClick={hideModal}></div>
       <div className="modal-content" style={{maxWidth:"420px", borderRadius:"4px", overflowX: "hidden"}}>
         <div className="card">
           {!props.showingTracks ? 
           <div className="card-content">
             <p className="title has-text-black">
-              {props.title}
+              {data.title}
             </p>
-            <img src={props.cover} alt="" style={{display: "block",minWidth: "320px", margin: "0 auto", ...styles.fadeIn}}/>
+            <img src={data.cover} alt="" style={{display: "block",minWidth: "320px", margin: "0 auto", ...styles.fadeIn}}/>
             <p className="has-text-centered help">
-              Released <b>{props.releaseDate}</b>
+              Released <b>{data.releaseDate}</b>
             </p>
           </div>:
           <div className="card-content">
             <p className="title has-text-black">
-              {props.title}
+              {data.title}
             </p>
-            {<TrackList albumId={props.albumId}/>}
+            {<TrackList albumId={data.albumId}/>}
           </div>}
           <div className="card-footer">
             {!props.showingTracks ? 
@@ -33,8 +35,8 @@ const Modal = props=>{
                 Return
               </a>
             }
-            <a href={props.href} target="_blank" className="card-footer-item has-text-dark">
-              Buy for {props.price}
+            <a href={data.href} target="_blank" className="card-footer-item has-text-dark">
+              Buy for {data.price}
             </a>
           </div>
         </div>

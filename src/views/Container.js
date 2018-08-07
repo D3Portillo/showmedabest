@@ -8,7 +8,7 @@ import Background from "./Background"
 class Container extends Component {
   constructor(props){
     super(props)
-    this.state  = {searchPaneIsActive: false, query:"", favsShowing: false, favs:[""], favsBinder: window.favs.getFavs()}
+    this.state  = {searchPaneIsActive: false, query:"", favsShowing: false, favs: false, favsBinder: window.favs.getFavs()}
     this.searhPaneToggler = this.searhPaneToggler.bind(this)
     this.search = this.search.bind(this)
     this.showFavs = this.showFavs.bind(this)
@@ -49,7 +49,13 @@ class Container extends Component {
     return (
       <div style={styles.container}>
       {this.props.feed ? 
-      <TopNav feed={this.props.feed} searhPaneToggler={this.searhPaneToggler} active={this.state.searchPaneIsActive} value={this.state.query} search={this.search} showFavs={this.showFavs}/>: null}    
+      <TopNav 
+        feed={this.props.feed} 
+        searhPaneToggler={this.searhPaneToggler} 
+        active={this.state.searchPaneIsActive} 
+        value={this.state.query} 
+        search={this.search} 
+        showFavs={this.showFavs}/>: null}    
         <div className="columns is-mobile is-gapless" style={{minHeight: "100vh", marginBottom: 0}}>
           {this.props.feed ? <Background feed={this.props.feed}/> : null} 
             {/*We show an album cover from the top 5 albums gotten from the api file ## fix: reTaking background couse of functional component re-rendering*/}
@@ -76,7 +82,7 @@ class Container extends Component {
                   Your favorite albums
                 </h1>
                 {
-                  this.state.favs!=0 && this.state.favsBinder!=""? 
+                  this.state.favs && this.state.favsBinder!=""? 
                   Object.keys(this.props.feed).filter(e=>
                     window.favs.hasFav(this.props.feed[e][0]["id"]["attributes"]["im:id"])).map(e=>{
                       let feed = this.props.feed[e][0]

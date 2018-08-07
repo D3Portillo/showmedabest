@@ -21,29 +21,30 @@ class ItemBox extends Component{
   }
 
   render(){
+    let props = this.props
     return(
-      this.props.favsMode ? 
+      props.favsMode ? 
       <div style={{...styles.box,padding:  "0.45rem 1rem", borderColor: "#616161"}} className={"itemBox Me" + (!this.state.favId?" hideMe": "")}>
         <h1 className={"subtitle is-size-4-mobile has-text-weight-normal has-text-grey is-size-4-tablet"} style={styles.boxTitle}>
-          #{1*this.props.pos + 1} - {this.props.name}
+          #{1*props.pos + 1} - {props.name}
         </h1>
         <h2 className="subtitle" style={{marginBottom: "0 !important"}}>
-          {this.props.artist}
+          {props.artist}
         </h2>
-        <button onClick={_=>this.setFav(this.props.albumId)} className="button is-black is-small favs" style={styles.favs} title="Remove this item to your favs list">
+        <button onClick={_=>this.setFav(props.albumId)} className="button is-black is-small favs" style={styles.favs} title="Remove this item to your favs list">
           <i className="fas fa-trash"></i>
         </button>
       </div>:
 
       <div style={styles.box} className="itemBox">
-      <h1 onClick={_=>this.props.showModal(this.props.title,  this.props.cover, this.props.href, this.props.albumId, this.props.price, this.props.releaseDate)} 
+      <h1 onClick={_=>props.showModal(props.title,  props.cover, props.href, props.albumId, props.price, props.releaseDate)} 
       className="subtitle is-size-4-mobile has-text-weight-normal has-text-grey is-size-3-tablet" style={styles.boxTitle}>
-        #{1*this.props.pos + 1} - {this.props.name}
+        #{1*props.pos + 1} - {props.name}
       </h1>
       <h2 className="subtitle" style={{marginBottom: "0 !important"}}>
-        {this.props.artist}
+        {props.artist}
       </h2>
-      <button onClick={_=>this.setFav(this.props.albumId)} className="button is-dark is-small favs" style={styles.favs} title="Add item to your favs list">
+      <button onClick={_=>this.setFav(props.albumId)} className="button is-dark is-small favs" style={styles.favs} title="Add item to your favs list">
         <i className={"fas fa-heart " + (this.state.favId ? "has-text-danger":"has-text-primary")}></i>
       </button>
       </div>

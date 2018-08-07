@@ -6,7 +6,7 @@ import styles from "../assets/js/styles"
 class LeftPane extends Component{
   constructor(props){
     super(props)
-    this.state = {modalIsActive : false, title:"", cover:"",href:"" , showingTracks: false, albumId: "", price: "", releaseDate: ""}
+    this.state = {modalIsActive : false, showingTracks: false, modalData:{title:"", cover:"",href:"" , albumId: "", price: "", releaseDate: ""}}
     this.showModal = this.showModal.bind(this)
     this.hideModal = this.hideModal.bind(this)
     this.showTracks = this.showTracks.bind(this)
@@ -21,7 +21,7 @@ class LeftPane extends Component{
   }
   
   showModal(title,cover,href,albumId, price,releaseDate){
-    this.setState({modalIsActive : true, title: title, cover: cover, href: href, albumId: albumId, price: price, releaseDate: releaseDate})
+    this.setState({modalIsActive : true, modalData:{title: title, cover: cover, href: href, albumId: albumId, price: price, releaseDate: releaseDate}})
     document.querySelector(".searchPane").classList.add("noOverFlow")
     document.querySelector(".topNav").classList.add("modalUp")
   }
@@ -41,7 +41,7 @@ class LeftPane extends Component{
     <div className={"column has-background-black is-5 searchPane " + (this.props.active ? "active" : "")} style={{...styles.pane,...styles.fadeIn}}>
       <div className="column is-8 is-offset-2">
       {
-      this.props.feed.length>0? //hoping we are avoiding falsy values here
+      this.props.feed.length>0?
       Object.keys(this.props.feed).map(e=>{
         let feed = this.props.feed[e][0]
         let albumId = feed["id"]["attributes"]["im:id"]
@@ -64,18 +64,13 @@ class LeftPane extends Component{
           </div>
       }
       </div>
-      {this.state.modalIsActive ? 
+      {this.state.modalIsActive ?
         <Modal 
           active={this.state.modalIsActive} 
-          albumId={this.state.albumId} 
           showTracks={this.showTracks} 
-          showingTracks={this.state.showingTracks} 
-          title={this.state.title} 
-          cover={this.state.cover} 
-          price={this.state.price} 
-          href={this.state.href} 
-          hideModal={this.hideModal} 
-          releaseDate={this.state.releaseDate}/> : null}
+          showingTracks={this.state.showingTracks}
+          data={this.state.modalData}
+          hideModal={this.hideModal}/> : null}
     </div>
     )
   }
