@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import styles from "../assets/js/styles"
 import TopNav from "./TopNav"
 import LeftPane from "./LeftPane"
-import ItemBox from "./ItemBox"
+import Favs from "./Favs"
 import Background from "./Background"
 
 class Container extends Component {
@@ -38,8 +38,13 @@ class Container extends Component {
 
   componentDidMount(){
     document.querySelector(".searchPane").scrollTop = 0
+    let playPreLoadIcon = document.createElement("i")
+    playPreLoadIcon.className = "far fa-play-circle is-hidden"
+    let pausePreLoadIcon = document.createElement("i")
+    pausePreLoadIcon.className = "far fa-pause-circle is-hidden"
+    document.body.appendChild(playPreLoadIcon,pausePreLoadIcon)
   }
-  
+
   showFavs(){
     this.setState({favsShowing: !this.state.favsShowing,favs: window.favs.getFavs()})
     this.props.fetchJsonAgain("givemeanupdatepleaseupal")
@@ -52,8 +57,6 @@ class Container extends Component {
   render() {
     return (
       <div style={styles.container}>
-        <i className="far fa-play-circle is-hidden"></i>
-        <i className="far fa-pause-circle is-hidden"></i>
       {this.props.feed ? 
       <TopNav 
         feed={this.props.feed} 
@@ -79,42 +82,13 @@ class Container extends Component {
             active={this.state.searchPaneIsActive} 
             bindFavs={this.bindFavs}/> : null}
         </div>
-        <div style={styles.fadeIn} className={"modal "+(this.state.favsShowing ? "is-active" : "")}>
-          <div className="modal-background" onClick={this.showFavs}></div>
-            <div className="modal-content" style={{borderRadius: "4px", maxWidth: "420px"}}>
-              <div className="card has-background-white">
-              <div className="card-content">
-                <h1 className="subtitle is-2 has-text-dark has-text-centered">
-                  Your favorite albums
-                </h1>
-                {
-                  this.state.favs && this.state.favsBinder!=""? 
-                  Object.keys(this.props.feed).filter(e=>
-                    window.favs.hasFav(this.props.feed[e][0]["id"]["attributes"]["im:id"])).map(e=>{
-                      let feed = this.props.feed[e][0]
-                      return <ItemBox 
-                        name={feed["im:name"]["label"]} 
-                        artist={feed["im:artist"]["label"]} 
-                        key={e} 
-                        pos={this.props.feed[e][1]} 
-                        cover={feed["im:image"][2]["label"]} 
-                        href={feed["link"]["attributes"]["href"]} 
-                        showModal={false} 
-                        albumId={feed["id"]["attributes"]["im:id"]}
-                        price={feed["im:price"]["label"]} 
-                        title={feed["title"]["label"]}
-                        favId={feed["id"]["attributes"]["im:id"]} 
-                        bindFavs={this.bindFavs}
-                        favsMode={true}/>
-                  }): 
-                  <p className="has-text-centered" style={{padding: "1rem 0.5rem"}}>
-                    Empty, please add some songs tappin' the heart on them, dont be that bad! :3
-                  </p>
-                }
-              </div>
-            </div>
-          </div>
-        </div>
+        {this.state.favsShowing ? 
+        <Favs 
+          feed={this.props.feed} 
+          favs={this.state.favs} 
+          favsBinder={this.state.favsBinder}
+          showFavs={this.showFavs}
+          bindFavs={this.bindFavs}/> : null}
       </div>
     )
   }

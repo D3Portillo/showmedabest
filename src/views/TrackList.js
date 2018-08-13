@@ -27,28 +27,33 @@ class TrackList extends Component{
     //we append the script on a hidden div thus it gets executed and calls window.dataOn
   }
   
-  async prepareJson(json){
+  prepareJson(json){
     let iLoaded = i =>{
       audioArr[i].oncanplay = null
       document.querySelector(".audio"+i).classList.toggle("is-hidden")
     }
+
     let qs = []
     let audioArr = []
     for(let i=1;i<json["resultCount"];++i){
-      await qs.push(json["results"][i]["trackName"])
-      await audioArr.push(new Audio(json["results"][i]["previewUrl"]))
+      qs.push(json["results"][i]["trackName"])
+      audioArr.push(new Audio(json["results"][i]["previewUrl"]))
       audioArr[i-1].oncanplay = _=> iLoaded(i-1)
     }
     this.setState({tracks: qs, audioArr: audioArr})
     //we create to arrays one holding  tracknames and another one holdingg it's audio Preview
+    //deleted async, event handlers can do the trick here
   }
 
   componentWillUnmount(){
     this.state.audioArr.forEach((e,i)=>{
       e.pause()
       e.currentTime = 0
+      e.oncanplay = null
+      e.onplaying = null
+      e.onended = null
     })
-    //We gotta pause and clear em'
+    //We gotta pause and clear em' all
   }
 
   playMe(i){

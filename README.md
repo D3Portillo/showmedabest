@@ -21,6 +21,8 @@ showmedabest
 |  |  |--ItemBox.js
 |  |  |--TopNav.js
 |  |  |--Loader.js
+|  |  |--Modal.js
+|  |  |--Favs.js
 |  |--index.js
 |  |--registerServiceWorker.js
 |  |--cookies.js
