@@ -31,8 +31,8 @@ class ItemBox extends Component{
         <h2 className="subtitle" style={{marginBottom: "0 !important"}}>
           {props.artist}
         </h2>
-        <button onClick={_=>this.setFav(props.albumId)} className="button is-black is-small favs" style={styles.favs} title="Remove this item to your favs list">
-          <i className="fas fa-trash"></i>
+        <button onClick={_=>this.setFav(props.albumId)} className="button is-light is-small favs" style={styles.favs} title="Remove this item to your favs list">
+          <i className="fas fa-times"></i>
         </button>
       </div>:
 

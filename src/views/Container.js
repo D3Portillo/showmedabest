@@ -36,6 +36,10 @@ class Container extends Component {
     }
   }
 
+  componentDidMount(){
+    document.querySelector(".searchPane").scrollTop = 0
+  }
+  
   showFavs(){
     this.setState({favsShowing: !this.state.favsShowing,favs: window.favs.getFavs()})
     this.props.fetchJsonAgain("givemeanupdatepleaseupal")
@@ -48,6 +52,8 @@ class Container extends Component {
   render() {
     return (
       <div style={styles.container}>
+        <i className="far fa-play-circle is-hidden"></i>
+        <i className="far fa-pause-circle is-hidden"></i>
       {this.props.feed ? 
       <TopNav 
         feed={this.props.feed} 

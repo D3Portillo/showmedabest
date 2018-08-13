@@ -80,8 +80,6 @@ class Loader extends Component {
             <div className="spinner" style={styles.spinner}>
               <img src={this.props.logo} style={styles.logo} alt=""/>
             </div>
-            <i className="far fa-play-circle is-hidden"></i>
-            <i className="far fa-pause-circle is-hidden"></i>
           </div>
         </div> : <Container feed={this.state.feed} fetchJsonAgain={this.fetchJsonAgain}/>
       }

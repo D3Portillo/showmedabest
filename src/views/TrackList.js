@@ -27,12 +27,17 @@ class TrackList extends Component{
     //we append the script on a hidden div thus it gets executed and calls window.dataOn
   }
   
-  prepareJson(json){
+  async prepareJson(json){
+    let iLoaded = i =>{
+      audioArr[i].oncanplay = null
+      document.querySelector(".audio"+i).classList.toggle("is-hidden")
+    }
     let qs = []
     let audioArr = []
     for(let i=1;i<json["resultCount"];++i){
-      qs.push(json["results"][i]["trackName"])
-      audioArr.push(new Audio(json["results"][i]["previewUrl"]))
+      await qs.push(json["results"][i]["trackName"])
+      await audioArr.push(new Audio(json["results"][i]["previewUrl"]))
+      audioArr[i-1].oncanplay = _=> iLoaded(i-1)
     }
     this.setState({tracks: qs, audioArr: audioArr})
     //we create to arrays one holding  tracknames and another one holdingg it's audio Preview
@@ -66,7 +71,7 @@ class TrackList extends Component{
         document.querySelector(".audio"+i).innerHTML = '<i class="far fa-play-circle"></i>'
         //We add a listenter to the playing element so when music ends it's icon changes back
       }
-      document.querySelector(".audio"+i).innerHTML = '<i class="far fa-pause-circle"></i>'
+      au[i].onplaying=_=> document.querySelector(".audio"+i).innerHTML = '<i class="far fa-pause-circle"></i>'
       //finally we change the playing item icon 
     }
   }
@@ -89,7 +94,7 @@ class TrackList extends Component{
               <td>{1*i+1}</td>
               <td>{e}</td>
               <td>
-                <button onClick={_=>this.playMe(i)} className={"button is-danger audio"+i} title="Tap to play preview">
+                <button onClick={_=>this.playMe(i)} className={"button is-light is-hidden is-small audio"+i} title="Tap to play preview">
                   {/*Plays preview at it's index 'i'*/}
                   <i className="far fa-play-circle"></i>
                 </button>
