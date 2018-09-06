@@ -72,6 +72,19 @@ npm start
 if you are on windows you can use the git cmd , fetch it [here](https://gitforwindows.org/)
 and type all the above code
 
+## Pics [the url might be broken at any momment, so this pics can show off a lil]
+![](https://raw.githubusercontent.com/D3Portillo/d3-assets/master/showMeDaBest/landing.png)
+
+![](https://raw.githubusercontent.com/D3Portillo/d3-assets/master/showMeDaBest/preview.png)
+
+![](https://raw.githubusercontent.com/D3Portillo/d3-assets/master/showMeDaBest/search2.png)
+
+![](https://raw.githubusercontent.com/D3Portillo/d3-assets/master/showMeDaBest/album.png)
+
+![](https://raw.githubusercontent.com/D3Portillo/d3-assets/master/showMeDaBest/search.png)
+
+![](https://raw.githubusercontent.com/D3Portillo/d3-assets/master/showMeDaBest/favs.png)
+
 ## About the app and its code
 
 Of course the app is not finished, need to be pulished , there are some marked sections with hashes "#" that might be needing a lil upgrade
